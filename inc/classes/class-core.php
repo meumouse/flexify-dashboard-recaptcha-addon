@@ -23,7 +23,7 @@ class Core {
      */
     public function __construct() {
         add_action( 'admin_init', array( $this, 'register_settings' ));
-        add_action( 'admin_notices', array( $this, 'admin_notices' ));
+        add_action( 'admin_notices', array( $this, 'add_admin_notices' ));
 
         $site_key = Init::get_setting('recaptcha_site_key');
         $secret_key = Init::get_setting('recaptcha_secret_key');
@@ -46,7 +46,7 @@ class Core {
         } else {
             delete_option( 'flexify_dashboard_recaptcha_working' );
             update_option( 'flexify_dashboard_recaptcha_message_type', 'notice-error' );
-            update_option( 'flexify_dashboard_recaptcha_error', sprintf( __( 'A proteção reCAPTCHA para login administrativo não foi configurado corretamente. <a href="%s">Clique aqui</a> para configurar.', 'flexify-dashboard-recaptcha-addon' ), 'admin.php?page=flexify-dashboard-for-woocommerce'));
+            update_option( 'flexify_dashboard_recaptcha_error', sprintf( __( 'A proteção reCAPTCHA para login administrativo não foi configurado corretamente. <a href="%s">Clique aqui</a> para configurar.', 'flexify-dashboard-recaptcha-addon' ), 'admin.php?page=flexify-dashboard'));
         }
     }
 
@@ -63,7 +63,7 @@ class Core {
     
         delete_option('flexify_dashboard_recaptcha_working');
         update_option('flexify_dashboard_recaptcha_site_key', $site_key);
-        add_option('flexify_dashboard_recaptcha_error', sprintf( __('A proteção reCAPTCHA para login administrativo não foi configurado corretamente. <a href="%s">Clique aqui</a> para configurar.','flexify-dashboard-recaptcha-addon'), 'admin.php?page=flexify-dashboard-for-woocommerce'));
+        add_option('flexify_dashboard_recaptcha_error', sprintf( __('A proteção reCAPTCHA para login administrativo não foi configurado corretamente. <a href="%s">Clique aqui</a> para configurar.','flexify-dashboard-recaptcha-addon'), 'admin.php?page=flexify-dashboard'));
         add_option('flexify_dashboard_recaptcha_message_type', 'notice-error');
         
         if ( self::valid_key_secret( $site_key ) &&
@@ -72,7 +72,7 @@ class Core {
         } else {
             delete_option('flexify_dashboard_recaptcha_working');
             update_option('flexify_dashboard_recaptcha_message_type', 'notice-error');
-            update_option('flexify_dashboard_recaptcha_error', sprintf( __('A proteção reCAPTCHA para login administrativo não foi configurado corretamente. <a href="%s">Clique aqui</a> para configurar.','flexify-dashboard-recaptcha-addon'), 'admin.php?page=flexify-dashboard-for-woocommerce'));
+            update_option('flexify_dashboard_recaptcha_error', sprintf( __('A proteção reCAPTCHA para login administrativo não foi configurado corretamente. <a href="%s">Clique aqui</a> para configurar.','flexify-dashboard-recaptcha-addon'), 'admin.php?page=flexify-dashboard'));
         }
     }
 
@@ -115,11 +115,15 @@ class Core {
         $api_url = 'https://www.google.com/recaptcha/api.js?onload=submitDisable';
         wp_register_script('flexify_dashboard_recaptcha_google_api', $api_url, array(), null );
         
-        if ( ( !empty( $GLOBALS['pagenow'] ) && ( $GLOBALS['pagenow'] == 'options-general.php' || $GLOBALS['pagenow'] == 'wp-login.php' ) ) ) {
+        if ( ( ! empty( $GLOBALS['pagenow'] ) && ( $GLOBALS['pagenow'] === 'options-general.php' || $GLOBALS['pagenow'] === 'wp-login.php' ) ) ) {
             wp_enqueue_script('flexify_dashboard_recaptcha_google_api');
         }
     }
 
+
+    /**
+     * 
+     */
     public static function get_google_errors_as_string( $g_response ) {
         $string = '';
         $codes = array(
@@ -160,7 +164,7 @@ class Core {
         echo "var button = document.getElementById('wp-submit');\n";
         
         // do not disable button with id "submit" in admin context, as this is the settings submit button
-        if ( !is_admin() ) {
+        if ( ! is_admin() ) {
             echo "if (button === null) {\n";
             echo "button = document.getElementById('submit');\n";
             echo "}\n";
@@ -209,7 +213,7 @@ class Core {
         if ( isset( $_SERVER['PHP_SELF'] ) && basename( $_SERVER['PHP_SELF'] ) !== 'wp-login.php' ) {
             update_option('flexify_dashboard_recaptcha_notice', time());
             update_option('flexify_dashboard_recaptcha_message_type', 'notice-error');
-            update_option('flexify_dashboard_recaptcha_error', sprintf(__('Login reCAPTCHA was bypassed on login page: %s.','flexify-dashboard-recaptcha-addon'),basename($_SERVER['PHP_SELF'])));
+            update_option('flexify_dashboard_recaptcha_error', sprintf( __('O login reCAPTCHA foi ignorado na página de login: %s.','flexify-dashboard-recaptcha-addon' ), basename( $_SERVER['PHP_SELF'] ) ) );
             
             return $user_or_email;
         }
@@ -237,9 +241,10 @@ class Core {
                 curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
                 $result = curl_exec($ch);
                 $g_response = json_decode( $result );
+
                 update_option('flexify_dashboard_recaptcha_notice', time() );
                 update_option('flexify_dashboard_recaptcha_message_type', 'notice-warning');
-                update_option('flexify_dashboard_recaptcha_error', sprintf( __('O login reCAPTCHA voltou a usar cURL em vez de wp_remote_post(). A mensagem de erro foi: %s.','flexify-dashboard-recaptcha-addon'), $error_msg) );
+                update_option('flexify_dashboard_recaptcha_error', sprintf( __( 'O login reCAPTCHA voltou a usar cURL em vez de wp_remote_post(). A mensagem de erro foi: %s.','flexify-dashboard-recaptcha-addon' ), $error_msg ) );
             } else {
                 $g_response = json_decode( $result['body'] );
             }
@@ -264,7 +269,7 @@ class Core {
                         delete_option('flexify_dashboard_recaptcha_working');
                         update_option('flexify_dashboard_recaptcha_notice', time() );
                         update_option('flexify_dashboard_recaptcha_google_error', 'error');
-                        update_option('flexify_dashboard_recaptcha_error', sprintf( __('O login reCAPTCHA não está funcionando. <a href="%s">Verifique suas configurações</a>. A mensagem do Google foi: %s', 'flexify-dashboard-recaptcha-addon'), 'admin.php?page=flexify-dashboard-for-woocommerce', self::get_google_errors_as_string( $g_response ) ) );
+                        update_option('flexify_dashboard_recaptcha_error', sprintf( __('O login reCAPTCHA não está funcionando. <a href="%s">Verifique suas configurações</a>. A mensagem do Google foi: %s', 'flexify-dashboard-recaptcha-addon'), 'admin.php?page=flexify-dashboard', self::get_google_errors_as_string( $g_response ) ) );
                         
                         return $user_or_email; //invalid secret entered; prevent lockouts
                     } elseif ( isset( $g_response->{'error-codes'} ) ) {
@@ -280,7 +285,7 @@ class Core {
                         delete_option('flexify_dashboard_recaptcha_working');
                         update_option('flexify_dashboard_recaptcha_notice', time());
                         update_option('flexify_dashboard_recaptcha_google_error', 'error');
-                        update_option('flexify_dashboard_recaptcha_error', sprintf(__('O login reCAPTCHA não está funcionando. <a href="%s">Verifique suas configurações</a>.', 'flexify-dashboard-recaptcha-addon'), 'admin.php?page=flexify-dashboard-for-woocommerce').' '.__('A resposta do Google não foi válida.','flexify-dashboard-recaptcha-addon'));
+                        update_option('flexify_dashboard_recaptcha_error', sprintf( __('O login reCAPTCHA não está funcionando. <a href="%s">Verifique suas configurações</a>.', 'flexify-dashboard-recaptcha-addon'), 'admin.php?page=flexify-dashboard').' '.__('A resposta do Google não foi válida.','flexify-dashboard-recaptcha-addon'));
                         
                         return $user_or_email; //not a sane response, prevent lockouts
                     }
@@ -289,7 +294,7 @@ class Core {
                 delete_option('flexify_dashboard_recaptcha_working');
                 update_option('flexify_dashboard_recaptcha_notice', time() );
                 update_option('flexify_dashboard_recaptcha_google_error', 'error');
-                update_option('flexify_dashboard_recaptcha_error', sprintf( __('O login reCAPTCHA não está funcionando. <a href="%s">Verifique suas configurações</a>.', 'flexify-dashboard-recaptcha-addon'), 'admin.php?page=flexify-dashboard-for-woocommerce').' '.__('A resposta do Google não foi válida.','flexify-dashboard-recaptcha-addon'));
+                update_option('flexify_dashboard_recaptcha_error', sprintf( __('O login reCAPTCHA não está funcionando. <a href="%s">Verifique suas configurações</a>.', 'flexify-dashboard-recaptcha-addon'), 'admin.php?page=flexify-dashboard').' '.__('A resposta do Google não foi válida.','flexify-dashboard-recaptcha-addon'));
                 
                 return $user_or_email; //not a sane response, prevent lockouts
             }
@@ -312,14 +317,14 @@ class Core {
      * @since 1.0.0
      * @return void
      */
-    public static function admin_notices() {
+    public static function add_admin_notices() {
         // not working, or notice fired in last 30 seconds
         $flexify_dashboard_recaptcha_error = get_option('flexify_dashboard_recaptcha_error');
         $flexify_dashboard_recaptcha_working = get_option('flexify_dashboard_recaptcha_working');
         $flexify_dashboard_recaptcha_notice = get_option('flexify_dashboard_recaptcha_notice');
         $time = time();
         
-        if ( !empty( $flexify_dashboard_recaptcha_error ) && ( empty( $flexify_dashboard_recaptcha_working ) || ( $time - $flexify_dashboard_recaptcha_notice < 30 ) ) ) {
+        if ( ! empty( $flexify_dashboard_recaptcha_error ) && ( empty( $flexify_dashboard_recaptcha_working ) || ( $time - $flexify_dashboard_recaptcha_notice < 30 ) ) ) {
             $message_type = get_option('flexify_dashboard_recaptcha_message_type');
             
             if ( empty( $message_type ) ) {
@@ -350,4 +355,6 @@ class Core {
     }
 }
 
-new Core();
+if ( FLEXIFY_DASHBOARD_RECAPTCHA_DISABLED === false || Init::get_setting('enable_recaptcha_admin_login') === 'yes' ) {
+    new Core();
+}

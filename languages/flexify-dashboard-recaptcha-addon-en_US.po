@@ -1,0 +1,236 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Flexify Dashboard - reCAPTCHA addon\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-09-05 12:48+0000\n"
+"PO-Revision-Date: 2024-09-05 12:51+0000\n"
+"Last-Translator: \n"
+"Language-Team: English (United States)\n"
+"Language: en_US\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Loco https://localise.biz/\n"
+"X-Loco-Version: 2.6.11; wp-6.6.1\n"
+"X-Domain: flexify-dashboard-recaptcha-addon"
+
+#: inc/classes/class-admin.php:105
+msgid ""
+"1. Se você estiver vendo alguma mensagem de erro. Verifique suas credenciais "
+"antes de continuar."
+msgstr ""
+
+#: inc/classes/class-admin.php:106
+msgid "2. Se o reCAPTCHA apareceu corretamente, verifique os seguintes pontos:"
+msgstr ""
+
+#: inc/classes/class-admin.php:112
+msgid ""
+"3. Só feche essa janela após verificar que consegue fazer login "
+"perfeitamente."
+msgstr ""
+
+#: inc/classes/class-admin.php:113
+msgid ""
+"4. Se não conseguir fazer login como administrador em uma guia anônima, "
+"desative esse recurso. Do contrário você pode não conseguir entrar mais no "
+"painel."
+msgstr ""
+
+#: inc/classes/class-admin.php:114
+msgid ""
+"5. Em caso de emergência, adicione <code>"
+"define('FLEXIFY_DASHBOARD_RECAPTCHA_DISABLED', true);</code> no arquivo wp-"
+"config.php do WordPress para desativar o reCAPTCHA no login de administrador."
+msgstr ""
+
+#: inc/classes/class-core.php:262 inc/classes/class-core.php:265
+#: inc/classes/class-core.php:305 inc/classes/class-core.php:309
+msgid "<strong>ERRO</strong>: Por favor, marque a caixa ReCaptcha."
+msgstr ""
+
+#: inc/classes/class-core.php:279 inc/classes/class-core.php:282
+msgid "<strong>ERRO</strong>: ReCaptcha incorreto, tente novamente."
+msgstr ""
+
+#: inc/classes/class-core.php:49 inc/classes/class-core.php:66
+#: inc/classes/class-core.php:75
+#, php-format
+msgid ""
+"A proteção reCAPTCHA para login administrativo não foi configurado "
+"corretamente. <a href=\"%s\">Clique aqui</a> para configurar."
+msgstr ""
+
+#: inc/classes/class-core.php:288 inc/classes/class-core.php:297
+msgid "A resposta do Google não foi válida."
+msgstr ""
+
+#: inc/classes/class-updater.php:247
+msgid ""
+"A versão do plugin <strong>Flexify Dashboard - reCAPTCHA addon</strong> é a "
+"mais recente."
+msgstr ""
+
+#: inc/classes/class-admin.php:108
+msgid "Abra seu site em uma guia anônima."
+msgstr ""
+
+#: inc/classes/class-admin.php:63
+msgid ""
+"Acesse o link ao lado para consultar suas chaves de integração para o "
+"reCAPTCHA."
+msgstr ""
+
+#: inc/classes/class-admin.php:50
+msgid "Ativar reCAPTCHA no login de administrador"
+msgstr ""
+
+#: inc/classes/class-admin.php:51
+msgid "Ative essa opção para que a proteção reCAPTCHA possa ser inicializado."
+msgstr ""
+
+#: inc/classes/class-admin.php:72
+msgid "Chave do site"
+msgstr ""
+
+#: inc/classes/class-admin.php:84
+msgid "Chave secreta"
+msgstr ""
+
+#: flexify-dashboard-recaptcha-addon.php:208
+msgid "Configurar"
+msgstr ""
+
+#: inc/classes/class-admin.php:42
+msgid "Configurar integração com Google reCAPTCHA"
+msgstr ""
+
+#: inc/classes/class-admin.php:62
+msgid "Consultar credenciais"
+msgstr ""
+
+#: flexify-dashboard-recaptcha-addon.php:228
+msgid "Documentação"
+msgstr ""
+
+#. Description of the plugin
+msgid ""
+"Extensão que adiciona uma camada extra de proteção no login de administrador "
+"do WordPress, prevenindo ataques por bots, exclusivo para o Flexify "
+"Dashboard."
+msgstr ""
+
+#: inc/classes/class-admin.php:43
+msgid "Fechar"
+msgstr ""
+
+#. Name of the plugin
+msgid "Flexify Dashboard - reCAPTCHA addon"
+msgstr ""
+
+#: inc/classes/class-admin.php:66
+msgid "Google reCAPTCHA"
+msgstr ""
+
+#. Author URI of the plugin
+msgid "https://meumouse.com/"
+msgstr ""
+
+#. URI of the plugin
+msgid "https://meumouse.com/plugins/flexify-dashboard/"
+msgstr ""
+
+#: inc/classes/class-admin.php:73
+msgid ""
+"Informe aqui a chave do site relacionado a API do Google reCAPTCHA (Caixa de "
+"verificação v2)."
+msgstr ""
+
+#: inc/classes/class-admin.php:85
+msgid ""
+"Informe aqui a chave secreta relacionado a API do Google reCAPTCHA (Caixa de "
+"verificação v2)."
+msgstr ""
+
+#. Author of the plugin
+msgid "MeuMouse.com"
+msgstr ""
+
+#: inc/classes/class-updater.php:254
+msgid ""
+"Não foi possível verificar atualizações para o plugin <strong>Flexify "
+"Dashboard - reCAPTCHA addon.</strong>"
+msgstr ""
+
+#: inc/classes/class-core.php:216
+#, php-format
+msgid "O login reCAPTCHA foi ignorado na página de login: %s."
+msgstr ""
+
+#: inc/classes/class-core.php:288 inc/classes/class-core.php:297
+#, php-format
+msgid ""
+"O login reCAPTCHA não está funcionando. <a href=\"%s\">Verifique suas "
+"configurações</a>."
+msgstr ""
+
+#: inc/classes/class-core.php:272
+#, php-format
+msgid ""
+"O login reCAPTCHA não está funcionando. <a href=\"%s\">Verifique suas "
+"configurações</a>. A mensagem do Google foi: %s"
+msgstr ""
+
+#: inc/classes/class-core.php:247
+#, php-format
+msgid ""
+"O login reCAPTCHA voltou a usar cURL em vez de wp_remote_post(). A mensagem "
+"de erro foi: %s."
+msgstr ""
+
+#: inc/classes/class-core.php:132
+msgid "O parâmetro de resposta está faltando."
+msgstr ""
+
+#: inc/classes/class-core.php:133
+msgid "O parâmetro de resposta é inválido ou está incorreto."
+msgstr ""
+
+#: inc/classes/class-core.php:130
+msgid "O parâmetro secreto está faltando."
+msgstr ""
+
+#: inc/classes/class-core.php:131
+msgid "O parâmetro secreto é inválido ou está malformado."
+msgstr ""
+
+#: flexify-dashboard-recaptcha-addon.php:194
+msgid ""
+"O plugin <strong>Flexify Dashboard - reCAPTCHA addon</strong> necessita do "
+"<strong>Flexify Dashboard</strong> para funcionar corretamente, realize a "
+"instalação e ativação antes de ativar este."
+msgstr ""
+
+#: inc/classes/class-admin.php:103
+msgid "Observações importantes!"
+msgstr ""
+
+#: inc/classes/class-admin.php:109
+msgid "Tente fazer login como administrador."
+msgstr ""
+
+#: flexify-dashboard-recaptcha-addon.php:256
+#: flexify-dashboard-recaptcha-addon.php:267
+msgid "Trapaceando?"
+msgstr ""
+
+#: inc/classes/class-updater.php:233
+msgid ""
+"Uma nova versão do plugin <strong>Flexify Dashboard - reCAPTCHA "
+"addon</strong> está disponível."
+msgstr ""
+
+#: inc/classes/class-updater.php:205
+msgid "Verificar atualizações"
+msgstr ""

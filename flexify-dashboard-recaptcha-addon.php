@@ -156,6 +156,7 @@ class Recaptcha {
 		$this->define( 'FLEXIFY_DASHBOARD_RECAPTCHA_ABSPATH', dirname( FLEXIFY_DASHBOARD_RECAPTCHA_FILE ) . '/' );
 		$this->define( 'FLEXIFY_DASHBOARD_RECAPTCHA_SLUG', self::$slug );
 		$this->define( 'FLEXIFY_DASHBOARD_RECAPTCHA_VERSION', self::$version );
+		$this->define( 'FLEXIFY_DASHBOARD_RECAPTCHA_DISABLED', false );
 	}
 
 
@@ -168,6 +169,7 @@ class Recaptcha {
 	public function setup_includes() {
 		$includes = array(
 			'classes/class-core.php',
+			'classes/class-admin.php',
 			'classes/class-updater.php',
 		);
 

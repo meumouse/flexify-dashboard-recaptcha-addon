@@ -63,7 +63,7 @@ class Updater {
             $remote = get_transient( $this->cache_data_base_key );
     
             if ( false === $remote ) {
-                $url = 'https://raw.githubusercontent.com/meumouse/flexify-checkout-for-woocommerce/main/updater/flexify-checkout-updater.json';
+                $url = 'https://github.com/meumouse/flexify-dashboard-recaptcha-addon/raw/main/dist/update-checker.json';
                 $params = array(
                     'timeout' => 10,
                     'headers' => array(
@@ -230,7 +230,7 @@ class Updater {
     
                 // if the current version is lower than that of the remote server
                 if ( version_compare( $current_version, $latest_version, '<' )) {
-                    $message = esc_html__('Uma nova versão do plugin Flexify Dashboard - reCAPTCHA addon está disponível.', 'flexify-dashboard-recaptcha-addon');
+                    $message = __('Uma nova versão do plugin <strong>Flexify Dashboard - reCAPTCHA addon</strong> está disponível.', 'flexify-dashboard-recaptcha-addon');
                     $class = 'notice is-dismissible notice-success';
     
                     // Display notice
@@ -244,14 +244,14 @@ class Updater {
                     </script>
                     <?php
                 } elseif ( version_compare( $current_version, $latest_version, '>=' ) ) {
-                    $message = esc_html__('A versão do plugin Flexify Dashboard - reCAPTCHA addon é a mais recente.', 'flexify-dashboard-recaptcha-addon');
+                    $message = __('A versão do plugin <strong>Flexify Dashboard - reCAPTCHA addon</strong> é a mais recente.', 'flexify-dashboard-recaptcha-addon');
                     $class = 'notice is-dismissible notice-success';
     
                     // Display notice
                     printf( '<div class="%1$s"><p>%2$s</p></div>', esc_attr( $class ), $message );
                 }
             } else {
-                $message = esc_html__('Não foi possível verificar atualizações para o plugin Flexify Dashboard - reCAPTCHA addon.', 'flexify-dashboard-recaptcha-addon');
+                $message = __('Não foi possível verificar atualizações para o plugin <strong>Flexify Dashboard - reCAPTCHA addon.</strong>', 'flexify-dashboard-recaptcha-addon');
                 $class = 'notice is-dismissible notice-error';
     
                 // Display notice
